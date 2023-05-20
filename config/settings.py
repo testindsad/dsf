@@ -136,14 +136,12 @@ MEDIA_URL = '/media/'
 
   
 
-if DEBUG:
+STATIC_URL = '/static/'
 
-  STATIC_ROOT = '/root/django/static'
+MEDIA_URL = '/media/'
 
-else:
-
-  STATIC_ROOT = '/root/django/static'
-
+  
+STATIC_ROOT = '/home/asanodenis.biz/public_html/dsf/asanpay/static'
   
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
