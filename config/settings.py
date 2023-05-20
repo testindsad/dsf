@@ -54,7 +54,6 @@ MIDDLEWARE = [
     'asanpay.middleware.VisitCountMiddleware',
     'asanpay.middleware.BanIPMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'asanpay.middleware.IPBanMiddleware',
     'asanpay.middleware.ActiveUserMiddleware',
 
