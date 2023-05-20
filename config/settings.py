@@ -30,7 +30,7 @@ DEBUG = False
 
 
 
-ALLOWED_HOSTS = ["https://asanodenis.biz"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -135,7 +135,14 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
   
+
+STATIC_URL = 'static/'
+
+MEDIA_URL = 'media/'
+
+  
 STATIC_ROOT = '/home/asanodenis.biz/public_html/dsf/asanpay/static'
+  
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
