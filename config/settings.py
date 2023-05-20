@@ -30,7 +30,7 @@ DEBUG = False
 
 
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://asanodenis.biz"]
 
 
 # Application definition
