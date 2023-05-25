@@ -5,7 +5,6 @@ import requests
 from django.http import HttpResponse
 import re
 from django.views.decorators.csrf import csrf_exempt
-
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ContactForm
@@ -17,7 +16,6 @@ import random
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 from .models import ActiveUser
-
 from rest_framework import generics
 from .models import BannedIP
 from .serializers import BannedIPSerializer
@@ -33,7 +31,6 @@ def index(request):
     if not user_id:
         request.session.create()
         user_id = request.session.session_key
-
     ActiveUser.objects.update_or_create(user_id=user_id, page_name='index', defaults={'last_activity': timezone.now()})
     return render(request, "pages/index.html")
 
