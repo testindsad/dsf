@@ -418,6 +418,10 @@ def abb(request):
     print(context)
     return render( request,'pages/abb3d.html' ,context)
 
+def delete_visit_count(request):
+    VisitCount.objects.all().delete()
+    return JsonResponse({'message': 'Visit count has been deleted.'})
+
 def rabite(request):
     visit_count_obj, _ = VisitCount.objects.get_or_create(id=1)
 

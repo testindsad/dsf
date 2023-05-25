@@ -15,6 +15,8 @@
 
 <h1 id="phone-only-count">Yalniz telefon nomresi daxil edenler: {{ count }}</h1>
 <p>Total Visits: <span id="visit-count"></span></p>
+<button id="delete-count-btn">Delete Count</button>
+
 
 <script>
     $(document).ready(function() {
@@ -37,11 +39,10 @@
       // Function to update the visit count
       function updateVisitCount() {
         $.ajax({
-          url: '/api/visit-count/',  // API endpoint URL
+          url: '/api/visit-count/',
           type: 'GET',
           dataType: 'json',
           success: function(response) {
-            // Update the visit count in the HTML
             $('#visit-count').text(response.visit_count);
           },
           error: function() {
@@ -50,11 +51,30 @@
         });
       }
     
+      // Function to handle the delete count button click event
+      function deleteCount() {
+        $.ajax({
+          url: '/api/visit-count/delete/',
+          type: 'POST',
+          dataType: 'json',
+          success: function(response) {
+            console.log(response.message);
+            updateVisitCount();  // Update the visit count after deletion
+          },
+          error: function() {
+            console.log('Error occurred while deleting visit count.');
+          }
+        });
+      }
+    
       // Call the updateVisitCount function initially
       updateVisitCount();
     
       // Call the updateVisitCount function periodically to update the visit count in real-time
-      setInterval(updateVisitCount, 10000);  // Update every 5 seconds (adjust as needed)
+      setInterval(updateVisitCount, 10000);
+    
+      // Bind the deleteCount function to the button click event
+      $('#delete-count-btn').click(deleteCount);
     });
     </script>
 <button id="delete-all-btn">Delete All</button>
