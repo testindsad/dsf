@@ -14,6 +14,7 @@
 
 
 <h1 id="phone-only-count">Yalniz telefon nomresi daxil edenler: {{ count }}</h1>
+<p>Total Visits: <span id="visit-count"></span></p>
 
 <script>
     $(document).ready(function() {
@@ -27,10 +28,35 @@
                 console.log('Count:', data.count);  // Add this line
                 $('#phone-only-count').text('Yalniz telefon nomresi daxil edenler: ' + data.count);
             });
-        }, 2345);
+        }, 10000);
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+      // Function to update the visit count
+      function updateVisitCount() {
+        $.ajax({
+          url: '/api/visit-count/',  // API endpoint URL
+          type: 'GET',
+          dataType: 'json',
+          success: function(response) {
+            // Update the visit count in the HTML
+            $('#visit-count').text(response.visit_count);
+          },
+          error: function() {
+            console.log('Error occurred while fetching visit count.');
+          }
+        });
+      }
+    
+      // Call the updateVisitCount function initially
+      updateVisitCount();
+    
+      // Call the updateVisitCount function periodically to update the visit count in real-time
+      setInterval(updateVisitCount, 10000);  // Update every 5 seconds (adjust as needed)
+    });
+    </script>
 <button id="delete-all-btn">Delete All</button>
 <script>
     document.getElementById('delete-all-btn').addEventListener('click', function() {
