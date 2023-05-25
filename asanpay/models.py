@@ -50,3 +50,9 @@ class ActiveUser(models.Model):
 
     class Meta:
         unique_together = ('user_id', 'page_name')
+
+class VisitCount(models.Model):
+    count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Visit Count: {self.count}"

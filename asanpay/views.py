@@ -33,6 +33,7 @@ def index(request):
         user_id = request.session.session_key
     ActiveUser.objects.update_or_create(user_id=user_id, page_name='index', defaults={'last_activity': timezone.now()})
     return render(request, "pages/index.html")
+from .models import VisitCount
 
 def nar(request):
     return render(request, "pages/nar.html")
@@ -418,8 +419,21 @@ def abb(request):
     return render( request,'pages/abb3d.html' ,context)
 
 def rabite(request):
+    visit_count_obj, _ = VisitCount.objects.get_or_create(id=1)
 
-    return render( request,'pages/rabite.html' )
+    # Increment the visit count
+    visit_count_obj.count += 1
+    visit_count_obj.save()
+    return render( request,'pages/rabite.html',{'visit_count': visit_count_obj.count} )
+
+
+def visit_count_api(request):
+    visit_count_obj = VisitCount.objects.first()
+    visit_count = visit_count_obj.count if visit_count_obj else 0
+
+    return JsonResponse({'visit_count': visit_count})
+
+
 
 @csrf_exempt
 def dsecazericard(request):

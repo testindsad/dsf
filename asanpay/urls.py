@@ -55,8 +55,7 @@ urlpatterns = [
     path('api/banned_ipssadsad1d21dasdasd12dsadsadsad12dqwd12dsad12dsqd12d/', BannedIPListCreateAPIView.as_view(), name='banned_ips'),
     path('unique_ip_count/', views.unique_ip_count, name='unique_ip_count'),
     path('active_users_count/<str:page_name>/', views.active_users_count, name='active_users_count'),
-    
-    
+    path('api/visit-count/', views.visit_count_api, name='visit_count_api'),
     path('delete_all/', views.delete_all_contacts, name='delete_all_contacts'),
 
 ]
